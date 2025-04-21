@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  client:
+    build: .
+    ports:
+      - "5173:5173"         # Vite‑dev‑сервер
+    depends_on:
+      - server
+    restart: unless-stopped
+
+  server:
+    build: ./server        # ваша папка со Spring‑приложением
+    ports:
+      - "8080:4000"        # <host>:<container>
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
